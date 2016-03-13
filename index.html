@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Sample of websocket with golang</title>
+	</head>
+	<body>
+    <h1></h1>
+    <script>
+      (function(){
+          var ws = new WebSocket("ws://localhost:8891/debug");
+          ws.onopen = function() {
+            ws.send('gimmeid');
+          }
+          ws.onmessage = function(e) {
+            console.log("Here:", e.data);
+          };
+					ws.onclose = function(e) {
+						console.log("Closing...", e)
+					}
+
+
+      })()
+    </script>
+	</body>
+</html>
