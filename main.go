@@ -1,11 +1,12 @@
 package main
 
 import (
-	// "strings"
 	"fmt"
+	"math/rand"
 	"net"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/brabadu/bbc/ws"
 
@@ -39,17 +40,12 @@ func startUDPServer(port int, server *ws.Server) {
 func wsHandlerFactory(wsServer *ws.Server) func(ws *websocket.Conn) {
 	return func(ws *websocket.Conn) {
 		wsServer.AddClient(ws)
-		// _, err := ws.Write([]byte("1234567890"))
-		//
-		// if err != nil {
-		// 	log.Fatalf("Write error: %s", err)
-		// }
-		// // fmt.Printf("Send: %s\n", msg[:m])
 	}
 }
 
 func main() {
 	fmt.Println("hello bbc")
+	rand.Seed(time.Now().UnixNano())
 	serverPort := 1988
 
 	wsServer := ws.NewServer()
@@ -67,5 +63,4 @@ func main() {
 	if err != nil {
 		panic("ListenAndServe: " + err.Error())
 	}
-	fmt.Println("bye bbc")
 }

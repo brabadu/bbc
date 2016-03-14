@@ -9,9 +9,20 @@ import (
 
 // Client ssss
 type Client struct {
-	server *Server
-	key    int
+	key    string
 	conn   *websocket.Conn
+	server *Server
+}
+
+// NewClient shit
+func NewClient(key string, connection *websocket.Conn, server *Server) *Client {
+	client := &Client{
+		key,
+		connection,
+		server,
+	}
+	client.conn.Write([]byte(key))
+	return client
 }
 
 // ListenRead shit
@@ -30,6 +41,6 @@ func (c *Client) ListenRead() {
 
 // Message shit
 type Message struct {
-	key  int
+	key  string
 	body string
 }
