@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>Sample of websocket with golang</title>
-	</head>
-	<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sample of websocket with golang</title>
+  </head>
+  <body>
     <h1></h1>
     <script>
       (function(){
           var ws = new WebSocket("ws://localhost:8891/debug");
-          ws.onopen = function() {
+					ws.onopen = function() {
             ws.send('gimmeid');
           }
           ws.onmessage = function(e) {
             console.log("Here:", e.data);
+            var h3 = document.createElement('h3');
+            h3.innerHTML = e.data;
+            document.body.appendChild(h3)
           };
-					ws.onclose = function(e) {
-						console.log("Closing...", e)
-					}
+          ws.onclose = function(e) {
+            console.log("Closing...", e)
+          }
 
 
       })()
     </script>
-	</body>
+  </body>
 </html>
